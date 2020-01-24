@@ -40,7 +40,7 @@ class Day extends React.Component {
     const buttonBackground = (clicked) ? 'rgb(0,132,137)' : 'rgb(237, 246, 246)';
     const buttonTextColor = (clicked) ? 'rgb(237, 246, 246)' : 'rgb(0, 132, 137)';
     return (
-      <td>
+      <td className="tableElement">
         <button
           type="button"
           className="dateButton"
