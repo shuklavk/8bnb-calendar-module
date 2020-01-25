@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Day from './src/components/Day.jsx';
+import Row from './src/components/Row.jsx';
 
 
-ReactDOM.render(<Day />, document.getElementById('app'));
+ReactDOM.render(<Row />, document.getElementById('app'));
