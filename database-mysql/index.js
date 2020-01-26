@@ -20,7 +20,7 @@ connection.connect((err) => {
 
 // Helper function to add data to availabilityDays table
 const addToAvailTable = (minDays, startDate, endDate, callback) => {
-  connection.query(`INSERT INTO availabilityDays (startDate, endDate, minDaysStay) VALUES(?, ?, ?)`, [startDate, endDate, minDays], (err, results) => {
+  connection.query(`INSERT INTO availability_days (startDate, endDate, minDaysStay) VALUES(?, ?, ?)`, [startDate, endDate, minDays], (err, results) => {
     if (err) {
       callback(err);
     } else {
