@@ -48,3 +48,7 @@ function generateAvailTable() {
 
 // calls the seeding function
 generateAvailTable();
+
+module.exports = {
+  randomDate, getStartDate, getEndDate, getRandomMinDays,
+};
