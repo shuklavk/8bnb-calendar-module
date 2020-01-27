@@ -10,7 +10,9 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "start": "nodemon server/index.js",
-    "test": "jest"
+    "test": "jest",
+    "database": "mysql -u root -p < database-mysql/schema.sql",
+    "seed": "node database-mysql/script.js"
   },
   "dependencies": {
     "babel-jest": "^25.1.0",
