@@ -9,6 +9,7 @@ const Row = () => (
     <Day />
     <Day />
     <Day />
+    <Day />
   </tr>
 );
 

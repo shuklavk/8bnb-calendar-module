@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Row from './src/components/Row.jsx';
+import Calendar from './src/components/Calendar.jsx';
 
 
-ReactDOM.render(<Row />, document.getElementById('app'));
+ReactDOM.render(<Calendar />, document.getElementById('app'));
