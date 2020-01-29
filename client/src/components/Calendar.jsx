@@ -44,7 +44,7 @@ class Calendar extends React.Component {
         </div>
 
         <div className="calendarDiv">
-          <ForwardButton currMonth={currMonth} onForwardClick={this.onForwardClick} />
+          <ForwardButton onForwardClick={this.onForwardClick} />
           <Header currMonth={nextMonth} />
           <DaysOfWeek />
           <Row />
