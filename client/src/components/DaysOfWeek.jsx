@@ -12,7 +12,7 @@ class DaysOfWeek extends React.Component {
   render() {
     const DaysOfWeekArr = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
     const DaysOfWeekListArr = DaysOfWeekArr.map((ele) => (
-      <li className="day" style={{ width: '40px' }}>
+      <li className="day" style={{ width: '40px' }} key={ele}>
         <small>{ele}</small>
       </li>
     ));
