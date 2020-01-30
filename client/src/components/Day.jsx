@@ -39,11 +39,17 @@ class Day extends React.Component {
     // Alternating background color and text color on every click
     const buttonBackground = (clicked) ? 'rgb(0,132,137)' : 'rgb(237, 246, 246)';
     const buttonTextColor = (clicked) ? 'rgb(237, 246, 246)' : 'rgb(0, 132, 137)';
+
+    let { day, id } = this.props;
+    if (id === 'disabled') {
+      day = '';
+    }
     return (
       <td className="tableElement">
         <button
           type="button"
           className="dateButton"
+          id={id}
           style={{
             background: buttonBackground,
             color: buttonTextColor,
@@ -52,7 +58,7 @@ class Day extends React.Component {
           onMouseEnter={(e) => { this.changeBackgroundEnteringButton(e); }}
           onMouseLeave={(e) => { this.changeBackgroundLeavingButton(e); }}
         >
-          12
+          {day}
         </button>
       </td>
     );
