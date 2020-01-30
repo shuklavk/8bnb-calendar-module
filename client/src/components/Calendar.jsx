@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, endOfWeek
+  addMonths, subMonths,
 } from 'date-fns';
 import Table from './Table.jsx';
 import DaysOfWeek from './DaysOfWeek.jsx';
