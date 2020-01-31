@@ -99,6 +99,7 @@ class Day extends React.Component {
       style = {
         background: buttonBackground,
         color: buttonTextColor,
+        cursor: 'pointer',
       };
     }
     return (
