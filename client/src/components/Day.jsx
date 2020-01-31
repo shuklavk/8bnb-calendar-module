@@ -39,11 +39,23 @@ class Day extends React.Component {
     // Alternating background color and text color on every click
     const buttonBackground = (clicked) ? 'rgb(0,132,137)' : 'rgb(237, 246, 246)';
     const buttonTextColor = (clicked) ? 'rgb(237, 246, 246)' : 'rgb(0, 132, 137)';
+
+    let { day, id } = this.props;
+
+    // if the id is disabled we want to override the day value to show nothing
+    // the css is already handling the button being disabled, just need the text
+    // to not show
+    if (id === 'disabled') {
+      day = '';
+    }
     return (
       <td className="tableElement">
         <button
           type="button"
           className="dateButton"
+          // important to set to id since className attribute is already taken
+          // Also the id css overtakes className css
+          id={id}
           style={{
             background: buttonBackground,
             color: buttonTextColor,
@@ -52,7 +64,7 @@ class Day extends React.Component {
           onMouseEnter={(e) => { this.changeBackgroundEnteringButton(e); }}
           onMouseLeave={(e) => { this.changeBackgroundLeavingButton(e); }}
         >
-          12
+          {day}
         </button>
       </td>
     );

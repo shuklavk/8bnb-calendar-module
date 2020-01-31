@@ -1,10 +1,12 @@
 import React from 'react';
-import Row from './Row.jsx';
+import {
+  addMonths, subMonths,
+} from 'date-fns';
+import Table from './Table.jsx';
 import DaysOfWeek from './DaysOfWeek.jsx';
 import Header from './Header.jsx';
 import BackButton from './BackButton.jsx';
 import ForwardButton from './ForwardButton.jsx';
-import { addMonths, subMonths } from 'date-fns';
 
 
 class Calendar extends React.Component {
@@ -40,14 +42,14 @@ class Calendar extends React.Component {
           <BackButton onBackClick={this.onBackClick} />
           <Header currMonth={currMonth} />
           <DaysOfWeek />
-          <Row />
+          <Table currMonth={currMonth} />
         </div>
 
         <div className="calendarDiv">
           <ForwardButton onForwardClick={this.onForwardClick} />
           <Header currMonth={nextMonth} />
           <DaysOfWeek />
-          <Row />
+          <Table currMonth={nextMonth} />
         </div>
       </div>
     );
