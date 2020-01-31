@@ -4,7 +4,9 @@ import {
 import React from 'react';
 import Row from './Row.jsx';
 
-const Table = ({ currMonth }) => {
+const Table = ({
+  currMonth, dateClick, clickedStartDate, clickedEndDate
+}) => {
   // Function that gives array of all the dates in month and what classname
   // to give to each Day Component
 
@@ -40,10 +42,30 @@ const Table = ({ currMonth }) => {
       // We will look at one week at a time
       for (let i = 0; i < 7; i += 1) {
         const day = format(currDay, dateFormat);
-        const className = isSameMonth(currDay, monthStart) ? 'enabled' : 'disabled';
-        // Save an object with date and className
+        let id = 'enabled';
+        // If the user has chosen the reservation's start date and the current day
+        // is in between the start date and end date, then set its id to be 'clicked'
+        // else set it to be 'enabled'
+        if (clickedStartDate !== '') {
+          id = (currDay >= clickedStartDate && currDay <= clickedEndDate) ? 'clicked' : 'enabled';
+        }
+        // If the current day is before the reservation's start day and the end date is
+        // NOT yet chosen (hence the start and end being on the same day), then set the
+        // current day's id to 'greyedOut'
+        // JSON.stringify is used because comparing two objects
+        if (
+          currDay < clickedStartDate
+          && JSON.stringify(clickedEndDate) === JSON.stringify(clickedStartDate)
+        ) {
+          id = 'greyedOut';
+        }
+        // If the current date is not part of the same month
+        // (ex. the 31st of the previous month), the current date gets the id
+        // of 'disabled', overriding any previous id
+        const className = !isSameMonth(currDay, monthStart) ? 'disabled' : (id || 'enabled');
+        // Save an object with date (number format) and className and exactDate (full format)
         // className is important because it will help us modify the disabled buttons
-        days.push({ className, day });
+        days.push({ className, day, exactDate: currDay });
         // increment the currDay counter by one day
         currDay = addDays(currDay, 1);
       }
@@ -57,7 +79,13 @@ const Table = ({ currMonth }) => {
   // Creates the info (date/classname) needed for all the weeks
   const rowInfoArr = createArrayOfDates();
   // Maps the info to Row Components
-  const rowComponentArr = rowInfoArr.map((ele) => <Row dates={ele} key={ele[0].day} />);
+  const rowComponentArr = rowInfoArr.map((ele) => (
+    <Row
+      dates={ele}
+      key={ele[0].day}
+      dateClick={dateClick}
+    />
+  ));
 
   return (
     <div>
