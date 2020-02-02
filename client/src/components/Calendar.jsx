@@ -8,7 +8,6 @@ import Header from './Header.jsx';
 import BackButton from './BackButton.jsx';
 import ForwardButton from './ForwardButton.jsx';
 
-
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
