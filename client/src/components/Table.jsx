@@ -5,11 +5,10 @@ import React from 'react';
 import Row from './Row.jsx';
 
 const Table = ({
-  currMonth, dateClick, clickedStartDate, clickedEndDate
+  currMonth, dateClick, clickedStartDate, clickedEndDate, hoveredDate, hoveredDateFunction, yesterday
 }) => {
   // Function that gives array of all the dates in month and what classname
   // to give to each Day Component
-
   const createArrayOfDates = () => {
     // date format if you want just the day number
     const dateFormat = 'd';
@@ -48,6 +47,12 @@ const Table = ({
         // else set it to be 'enabled'
         if (clickedStartDate !== '') {
           id = (currDay >= clickedStartDate && currDay <= clickedEndDate) ? 'clicked' : 'enabled';
+          // As long as only the starting date is selected, all the dates between starting date
+          // and the hovered date should get an id of hovered (will have a seperate background and
+          // text color effect)
+          // When only the starting date is selected, the startDate and endDate will have the same
+          // value
+          id = (currDay > clickedStartDate && currDay <= hoveredDate && (JSON.stringify(clickedEndDate) === JSON.stringify(clickedStartDate))) ? 'hovered' : id;
         }
         // If the current day is before the reservation's start day and the end date is
         // NOT yet chosen (hence the start and end being on the same day), then set the
@@ -57,6 +62,10 @@ const Table = ({
           currDay < clickedStartDate
           && JSON.stringify(clickedEndDate) === JSON.stringify(clickedStartDate)
         ) {
+          id = 'greyedOut';
+        }
+        // all dates before the current date should be greyed out
+        if (currDay < yesterday) {
           id = 'greyedOut';
         }
         // If the current date is not part of the same month
@@ -84,6 +93,7 @@ const Table = ({
       dates={ele}
       key={ele[0].day}
       dateClick={dateClick}
+      hoveredDateFunction={hoveredDateFunction}
     />
   ));
 

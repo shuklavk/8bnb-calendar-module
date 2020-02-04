@@ -1,7 +1,7 @@
 import React from 'react';
 import Day from './Day.jsx';
 
-const Row = ({ dates, dateClick }) => {
+const Row = ({ dates, dateClick, hoveredDateFunction }) => {
   // Each row component takes the info (date, className, etc) and maps to each Day Component
   const arrOfDayComponents = dates.map((ele) => (
     <Day
@@ -10,6 +10,7 @@ const Row = ({ dates, dateClick }) => {
       exactDate={ele.exactDate}
       key={ele.day}
       dateClick={dateClick}
+      hoveredDateFunction={hoveredDateFunction}
     />
   ));
   return (
