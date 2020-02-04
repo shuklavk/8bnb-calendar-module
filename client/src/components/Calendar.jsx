@@ -7,6 +7,7 @@ import DaysOfWeek from './DaysOfWeek.jsx';
 import Header from './Header.jsx';
 import BackButton from './BackButton.jsx';
 import ForwardButton from './ForwardButton.jsx';
+import $ from 'jquery';
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -21,6 +22,16 @@ class Calendar extends React.Component {
     this.onBackClick = this.onBackClick.bind(this);
     this.dateClick = this.dateClick.bind(this);
     this.changeHoveredDate = this.changeHoveredDate.bind(this);
+  }
+
+  componentDidMount() {
+    ($.ajax({
+      url: '/data',
+      type: 'GET',
+      success: (data) => {
+        console.log(data);
+      },
+    }));
   }
 
   // Everytime someone clicks the forward arrow key, the current month increases by one
