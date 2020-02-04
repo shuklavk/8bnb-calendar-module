@@ -47,7 +47,11 @@ class Day extends React.Component {
   }
 
   // Helper function that changes background of button when user's mouse enters button area
+  // Also runs the hoveredDateFunction which gives Calendar component the hovered
+  // date
   changeBackgroundEnteringButton(e) {
+    const { hoveredDateFunction, exactDate, id } = this.props;
+    hoveredDateFunction(exactDate);
     const { clicked } = this.state;
     if (!clicked) {
       e.target.style.background = 'rgb(204,238,235)';
@@ -65,8 +69,9 @@ class Day extends React.Component {
 
   // Helper function that changes background of button when user's mouse exits button area
   changeBackgroundLeavingButton(e) {
+    const { id } = this.props;
     const { clicked } = this.state;
-    if (!clicked) {
+    if (!clicked && id !== 'hovered') {
       e.target.style.background = 'rgb(237,246,246)';
     }
   }
@@ -78,6 +83,11 @@ class Day extends React.Component {
     // Alternating background color and text color on every click
     let buttonBackground = (clicked) ? 'rgb(0,132,137)' : 'rgb(237, 246, 246)';
     let buttonTextColor = (clicked) ? 'rgb(237, 246, 246)' : 'rgb(0, 132, 137)';
+    // Buttons with the hovered id have special background and text colors
+    if (id === 'hovered') {
+      buttonBackground = 'rgb(204,238,235)';
+      buttonTextColor = 'rgb(237,246,246)';
+    }
 
     // if the id is disabled we want to override the day value to show nothing
     // the css is already handling the button being disabled, just need the text

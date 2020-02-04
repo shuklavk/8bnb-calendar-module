@@ -1,24 +1,37 @@
 import React from 'react';
 import {
-  addMonths, subMonths,
+  addMonths, subMonths, subDays
 } from 'date-fns';
 import Table from './Table.jsx';
 import DaysOfWeek from './DaysOfWeek.jsx';
 import Header from './Header.jsx';
 import BackButton from './BackButton.jsx';
 import ForwardButton from './ForwardButton.jsx';
+import $ from 'jquery';
 
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = ({
       currMonth: new Date(),
+      hoveredDate: '', // Date at which cursor is on after the start date has been selected
       clickedStartDate: '', // selected start date for reservation
       clickedEndDate: '', // selected end date for reservation
     });
     this.onForwardClick = this.onForwardClick.bind(this);
     this.onBackClick = this.onBackClick.bind(this);
     this.dateClick = this.dateClick.bind(this);
+    this.changeHoveredDate = this.changeHoveredDate.bind(this);
+  }
+
+  componentDidMount() {
+    ($.ajax({
+      url: '/data',
+      type: 'GET',
+      success: (data) => {
+        console.log(data);
+      },
+    }));
   }
 
   // Everytime someone clicks the forward arrow key, the current month increases by one
@@ -33,6 +46,13 @@ class Calendar extends React.Component {
     this.setState((prevState) => ({
       currMonth: subMonths(prevState.currMonth, 1),
     }));
+  }
+
+  // Everytime cursor moves to a new date, the states the hovered date
+  changeHoveredDate(date) {
+    this.setState({
+      hoveredDate: date,
+    });
   }
 
   // Everytime a date is clicked, it updates the reservation's start and end date
@@ -74,7 +94,9 @@ class Calendar extends React.Component {
   }
 
   render() {
-    const { currMonth, clickedStartDate, clickedEndDate } = this.state;
+    const {
+      currMonth, clickedStartDate, clickedEndDate, hoveredDate,
+    } = this.state;
     const nextMonth = addMonths(currMonth, 1);
     return (
       <div className="overallComponent" style={{ width: '632px' }}>
@@ -87,6 +109,9 @@ class Calendar extends React.Component {
             dateClick={this.dateClick}
             clickedEndDate={clickedEndDate}
             clickedStartDate={clickedStartDate}
+            hoveredDateFunction={this.changeHoveredDate}
+            hoveredDate={hoveredDate}
+            yesterday={subDays((new Date()), 1)}
           />
         </div>
 
@@ -99,6 +124,9 @@ class Calendar extends React.Component {
             dateClick={this.dateClick}
             clickedEndDate={clickedEndDate}
             clickedStartDate={clickedStartDate}
+            hoveredDateFunction={this.changeHoveredDate}
+            hoveredDate={hoveredDate}
+            yesterday={subDays((new Date()), 1)}
           />
         </div>
       </div>

@@ -29,5 +29,17 @@ const addToAvailTable = (minDays, startDate, endDate, callback) => {
   });
 };
 
+const getLocationInfo = (callback) => {
+  connection.query(`SELECT * FROM availability_days;`, (err, results) => {
+    if (err) {
+      callback(err);
+    } else {
+      const cleanResults = results.map((ele) => ({
+        id: ele.id, startDate: ele.startDate, endDate: ele.endDate, minDaysStay: ele.minDaysStay
+      }));
+      callback(null, cleanResults);
+    }
+  });
+};
 // Exporting helper function
-module.exports = { addToAvailTable };
+module.exports = { addToAvailTable, getLocationInfo };
