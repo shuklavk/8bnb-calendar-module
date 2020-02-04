@@ -8,6 +8,7 @@ import Header from './Header.jsx';
 import BackButton from './BackButton.jsx';
 import ForwardButton from './ForwardButton.jsx';
 import $ from 'jquery';
+import './Calendar.css';
 
 class Calendar extends React.Component {
   constructor(props) {
