@@ -1,9 +1,17 @@
 import React from 'react';
 import Day from './Day.jsx';
 
-const Row = ({ dates }) => {
-  // Each row component takes the info (date/className) and maps to each Day Component
-  const arrOfDayComponents = dates.map((ele) => <Day day={ele.day} id={ele.className} />);
+const Row = ({ dates, dateClick }) => {
+  // Each row component takes the info (date, className, etc) and maps to each Day Component
+  const arrOfDayComponents = dates.map((ele) => (
+    <Day
+      day={ele.day}
+      id={ele.className}
+      exactDate={ele.exactDate}
+      key={ele.day}
+      dateClick={dateClick}
+    />
+  ));
   return (
     <tr>
       {arrOfDayComponents}
