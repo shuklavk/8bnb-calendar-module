@@ -74,8 +74,8 @@ class Calendar extends React.Component {
     // date, making it the same as the end date
     // Else if the clicked date is before the start date, set the start
     // date to the new clicked date
-    // Finally if the clicked date is past the reservation's end date,
-    // set the end date to the clicked date
+    // Else if the clicked date is past the reservation's end date,
+    // set the end date to the clicked date if start and end date aren't same
     if (clickedStartDate === '') {
       this.setState({
         clickedStartDate: date,
