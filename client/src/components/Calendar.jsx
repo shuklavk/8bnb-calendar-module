@@ -18,6 +18,7 @@ class Calendar extends React.Component {
       hoveredDate: '', // Date at which cursor is on after the start date has been selected
       clickedStartDate: '', // selected start date for reservation
       clickedEndDate: '', // selected end date for reservation
+      reservedDates: [],
     });
     this.onForwardClick = this.onForwardClick.bind(this);
     this.onBackClick = this.onBackClick.bind(this);
@@ -30,7 +31,11 @@ class Calendar extends React.Component {
       url: '/data',
       type: 'GET',
       success: (data) => {
-        console.log(data);
+        const reservedDays = [data.startDate, data.endDate];
+        console.log(reservedDays);
+        this.setState((prevState) => ({
+          reservedDates: [...prevState.reservedDates, reservedDays],
+        }));
       },
     }));
   }
@@ -96,7 +101,7 @@ class Calendar extends React.Component {
 
   render() {
     const {
-      currMonth, clickedStartDate, clickedEndDate, hoveredDate,
+      currMonth, clickedStartDate, clickedEndDate, hoveredDate, reservedDates
     } = this.state;
     const nextMonth = addMonths(currMonth, 1);
     return (
@@ -113,6 +118,7 @@ class Calendar extends React.Component {
             hoveredDateFunction={this.changeHoveredDate}
             hoveredDate={hoveredDate}
             yesterday={subDays((new Date()), 1)}
+            reservedDates={reservedDates}
           />
         </div>
 
@@ -128,6 +134,7 @@ class Calendar extends React.Component {
             hoveredDateFunction={this.changeHoveredDate}
             hoveredDate={hoveredDate}
             yesterday={subDays((new Date()), 1)}
+            reservedDates={reservedDates}
           />
         </div>
       </div>

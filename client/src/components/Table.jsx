@@ -5,7 +5,8 @@ import React from 'react';
 import Row from './Row.jsx';
 
 const Table = ({
-  currMonth, dateClick, clickedStartDate, clickedEndDate, hoveredDate, hoveredDateFunction, yesterday
+  currMonth, dateClick, clickedStartDate, clickedEndDate, hoveredDate, hoveredDateFunction,
+  yesterday, reservedDates
 }) => {
   // Function that gives array of all the dates in month and what classname
   // to give to each Day Component
@@ -63,6 +64,16 @@ const Table = ({
           && JSON.stringify(clickedEndDate) === JSON.stringify(clickedStartDate)
         ) {
           id = 'greyedOut';
+        }
+        // Greys out already reserved dates
+        // Gets info from reservedDates array
+        for (let a = 0; a < reservedDates.length; a += 1) {
+          let sDate = new Date(reservedDates[a][0]);
+          let eDate = new Date(reservedDates[a][1]);
+          if (currDay >= sDate && currDay <= eDate) {
+            id = 'greyedOut';
+            break;
+          }
         }
         // all dates before the current date should be greyed out
         if (currDay < yesterday) {
