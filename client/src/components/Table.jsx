@@ -54,6 +54,21 @@ const Table = ({
           // When only the starting date is selected, the startDate and endDate will have the same
           // value
           id = (currDay > clickedStartDate && currDay <= hoveredDate && (JSON.stringify(clickedEndDate) === JSON.stringify(clickedStartDate))) ? 'hovered' : id;
+
+          // let closestReveservedDate = new Date("2020-03-21T07:00:00.000Z");
+          let closestReveservedDate = '';
+          let diff = Infinity;
+          for (let x = 0; x < reservedDates.length; x += 1) {
+            let sDate = new Date(reservedDates[x][0]);
+            let newDiff = (sDate - clickedStartDate);
+            if (newDiff >= 0 && newDiff < diff) {
+              diff = newDiff;
+              closestReveservedDate = sDate;
+            }
+          }
+          if (closestReveservedDate !== '' && currDay >= closestReveservedDate && JSON.stringify(clickedStartDate) === JSON.stringify(clickedEndDate) && clickedStartDate < closestReveservedDate) {
+            id = 'greyedOut';
+          }
         }
         // If the current day is before the reservation's start day and the end date is
         // NOT yet chosen (hence the start and end being on the same day), then set the

@@ -26,13 +26,15 @@ class Calendar extends React.Component {
     this.changeHoveredDate = this.changeHoveredDate.bind(this);
   }
 
+  // Set up in a way that all reserved dates for each location will
+  // be stored in an array, but my database only spits a single start and
+  // end date per reservation
   componentDidMount() {
     ($.ajax({
       url: '/data',
       type: 'GET',
       success: (data) => {
         const reservedDays = [data.startDate, data.endDate];
-        console.log(reservedDays);
         this.setState((prevState) => ({
           reservedDates: [...prevState.reservedDates, reservedDays],
         }));
@@ -91,7 +93,20 @@ class Calendar extends React.Component {
     } else if (date < clickedStartDate) {
       this.setState({
         clickedStartDate: date,
+        clickedEndDate: date,
       });
+    } else if (date > clickedEndDate) {
+      if (JSON.stringify(clickedStartDate) !== JSON.stringify(clickedEndDate)) {
+
+        this.setState({
+          clickedStartDate: date,
+          clickedEndDate: date,
+        });
+      } else {
+        this.setState({
+          clickedEndDate: date,
+        });
+      }
     } else {
       this.setState({
         clickedEndDate: date,
@@ -101,7 +116,7 @@ class Calendar extends React.Component {
 
   render() {
     const {
-      currMonth, clickedStartDate, clickedEndDate, hoveredDate, reservedDates
+      currMonth, clickedStartDate, clickedEndDate, hoveredDate, reservedDates,
     } = this.state;
     const nextMonth = addMonths(currMonth, 1);
     return (
