@@ -54,8 +54,8 @@ const Table = ({
           // When only the starting date is selected, the startDate and endDate will have the same
           // value
           id = (currDay > clickedStartDate && currDay <= hoveredDate && (JSON.stringify(clickedEndDate) === JSON.stringify(clickedStartDate))) ? 'hovered' : id;
-
-          // let closestReveservedDate = new Date("2020-03-21T07:00:00.000Z");
+          // Each date gets the closest reservedDate. This is useful because if that date becomes
+          // the start date, the most someone is allowed to book is the reservedDate
           let closestReveservedDate = '';
           let diff = Infinity;
           for (let x = 0; x < reservedDates.length; x += 1) {
