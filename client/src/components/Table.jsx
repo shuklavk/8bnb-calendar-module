@@ -5,7 +5,8 @@ import React from 'react';
 import Row from './Row.jsx';
 
 const Table = ({
-  currMonth, dateClick, clickedStartDate, clickedEndDate, hoveredDate, hoveredDateFunction, yesterday
+  currMonth, dateClick, clickedStartDate, clickedEndDate, hoveredDate, hoveredDateFunction,
+  yesterday, reservedDates
 }) => {
   // Function that gives array of all the dates in month and what classname
   // to give to each Day Component
@@ -53,6 +54,21 @@ const Table = ({
           // When only the starting date is selected, the startDate and endDate will have the same
           // value
           id = (currDay > clickedStartDate && currDay <= hoveredDate && (JSON.stringify(clickedEndDate) === JSON.stringify(clickedStartDate))) ? 'hovered' : id;
+
+          // let closestReveservedDate = new Date("2020-03-21T07:00:00.000Z");
+          let closestReveservedDate = '';
+          let diff = Infinity;
+          for (let x = 0; x < reservedDates.length; x += 1) {
+            let sDate = new Date(reservedDates[x][0]);
+            let newDiff = (sDate - clickedStartDate);
+            if (newDiff >= 0 && newDiff < diff) {
+              diff = newDiff;
+              closestReveservedDate = sDate;
+            }
+          }
+          if (closestReveservedDate !== '' && currDay >= closestReveservedDate && JSON.stringify(clickedStartDate) === JSON.stringify(clickedEndDate) && clickedStartDate < closestReveservedDate) {
+            id = 'greyedOut';
+          }
         }
         // If the current day is before the reservation's start day and the end date is
         // NOT yet chosen (hence the start and end being on the same day), then set the
@@ -63,6 +79,16 @@ const Table = ({
           && JSON.stringify(clickedEndDate) === JSON.stringify(clickedStartDate)
         ) {
           id = 'greyedOut';
+        }
+        // Greys out already reserved dates
+        // Gets info from reservedDates array
+        for (let a = 0; a < reservedDates.length; a += 1) {
+          let sDate = new Date(reservedDates[a][0]);
+          let eDate = new Date(reservedDates[a][1]);
+          if (currDay >= sDate && currDay <= eDate) {
+            id = 'greyedOut';
+            break;
+          }
         }
         // all dates before the current date should be greyed out
         if (currDay < yesterday) {
