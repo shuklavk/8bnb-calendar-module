@@ -1,13 +1,13 @@
 import React from 'react';
 import {
-  addMonths, subMonths, subDays
+  addMonths, subMonths, subDays,
 } from 'date-fns';
+import $ from 'jquery';
 import Table from './Table.jsx';
 import DaysOfWeek from './DaysOfWeek.jsx';
 import Header from './Header.jsx';
 import BackButton from './BackButton.jsx';
 import ForwardButton from './ForwardButton.jsx';
-import $ from 'jquery';
 import './Calendar.css';
 
 class Calendar extends React.Component {
