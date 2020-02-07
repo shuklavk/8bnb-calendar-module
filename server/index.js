@@ -2,7 +2,7 @@ const express = require('express');
 const db = require('../database-mysql/index.js');
 
 const app = express();
-const port = 3000;
+const port = 3003;
 
 app.use(express.static('client/dist'));
 app.get('/data', (req, res) => {
