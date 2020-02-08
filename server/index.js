@@ -1,17 +1,23 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const db = require('../database-mysql/index.js');
 
 const app = express();
-const port = 3003;
+const port = 3000;
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('client/dist'));
-app.get('/data', (req, res) => {
-  db.getLocationInfo((err, results) => {
+app.get('/data/:id', (req, res) => {
+  const id = Number(req.path.slice(6)) - 1;
+  db.getLocationInfo(id, (err, results) => {
     if (err) {
       console.log(err);
     } else {
-      const randomInd = Math.floor(Math.random() * 100);
-      res.send(results[randomInd]);
+      // const randomInd = Math.floor(Math.random() * 100);
+      console.log(results[0]);
+      res.send(results[0]);
     }
   });
 });

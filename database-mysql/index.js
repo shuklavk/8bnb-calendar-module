@@ -29,8 +29,8 @@ const addToAvailTable = (minDays, startDate, endDate, callback) => {
   });
 };
 
-const getLocationInfo = (callback) => {
-  connection.query(`SELECT * FROM availability_days;`, (err, results) => {
+const getLocationInfo = (id, callback) => {
+  connection.query(`SELECT * FROM availability_days WHERE id=?;`, [(id + 1)], (err, results) => {
     if (err) {
       callback(err);
     } else {
