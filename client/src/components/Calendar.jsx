@@ -19,7 +19,8 @@ class Calendar extends React.Component {
       clickedStartDate: '', // selected start date for reservation
       clickedEndDate: '', // selected end date for reservation
       reservedDates: [],
-      pageIdNumber: 1,
+      pageIdNumber: 0, // update page id number when going to another page
+      // (page 0 has no reservations)
     });
     this.onForwardClick = this.onForwardClick.bind(this);
     this.onBackClick = this.onBackClick.bind(this);
