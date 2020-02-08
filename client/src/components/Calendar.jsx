@@ -19,6 +19,7 @@ class Calendar extends React.Component {
       clickedStartDate: '', // selected start date for reservation
       clickedEndDate: '', // selected end date for reservation
       reservedDates: [],
+      pageIdNumber: 1,
     });
     this.onForwardClick = this.onForwardClick.bind(this);
     this.onBackClick = this.onBackClick.bind(this);
@@ -30,8 +31,9 @@ class Calendar extends React.Component {
   // be stored in an array, but my database only spits a single start and
   // end date per reservation
   componentDidMount() {
+    const { pageIdNumber } = this.state;
     ($.ajax({
-      url: '/data',
+      url: '/data/' + pageIdNumber,
       type: 'GET',
       success: (data) => {
         const reservedDays = [data.startDate, data.endDate];
