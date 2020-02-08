@@ -15,8 +15,6 @@ app.get('/data/:id', (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      // const randomInd = Math.floor(Math.random() * 100);
-      console.log(results[0]);
       res.send(results[0]);
     }
   });
