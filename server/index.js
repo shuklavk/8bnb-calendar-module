@@ -10,7 +10,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('client/dist'));
 app.get('/data/:id', (req, res) => {
-  const id = Number(req.path.slice(6)) - 1;
+  // const id = Number(req.path.slice(6)) - 1;
+  const id = req.params.id;
   db.getLocationInfo(id, (err, results) => {
     if (err) {
       console.log(err);

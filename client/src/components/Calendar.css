@@ -69,7 +69,7 @@ div{
 .overallComponent{
   text-align: left;
   z-index: 0;
-  position: absolute ;
+  position: relative ;
   left: 9px;
   background: rgb(255, 255, 255);
   box-sizing: border-box;
