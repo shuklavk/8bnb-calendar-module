@@ -1,4 +1,3 @@
-
 .dateButton {
   width: 40px;
   height: 39px;
@@ -80,7 +79,7 @@ div{
   user-select: none;
   background-color: rgb(255, 255, 255);
   color: rgb(117, 117, 117);
-  position: relative;
+  position: absolute;
   top: 18px;
   line-height: 0.78;
   left: 13px;
@@ -108,7 +107,7 @@ div{
   user-select: none;
   background-color: rgb(255, 255, 255) ;
   color: rgb(117, 117, 117) ;
-  position: relative;
+  position: absolute;
   top: 18px ;
   line-height: 0.78 ;
   right: 33px ;
@@ -138,4 +137,3 @@ div{
   height:0px;
   width: 0px;
 }
-
